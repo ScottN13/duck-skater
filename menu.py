@@ -1,13 +1,41 @@
 import os
 import sys
 from rich.console import Console
+from configparser import ConfigParser
 
+config = ConfigParser(comment_prefixes="#", delimiters="=")
+config.read("config/main.ini")
 console = Console()
 
 
 class engine():
-    class flasher():
-        def flash(): ...
+
+    def clear(): os.system('cls' if os.name == 'nt' else 'clear')
+
+    class error(): # error class for easy access
+        def ini(): sys.exception("# error: main.ini not found")
+        def emptyFirm(): sys.exception("# error: selected target has no firmware partition")
+        def noSignature(): sys.exception("# error: selected firmware has no signature patch")
+        def dumpError(): sys.exception('# error: dumping failed')
+        def readError(): sys.exception("# error: couldn't read firmware patches")
+
+
+    class flasher(): # the main flasher
+
+        def __init__(self):
+            ...
+
+
+        def flash():
+            engine.clear()
+            print("Loading flasher...")
+            try:
+                sigPatchVer = str(config["MAIN"]["sigPatchVer"])
+                print("Current SignaturePatch version is "+sigPatchVer)
+            except:
+                engine.error.ini()
+
+
         def patch(): ...
         def dump(): ...
         def update(): ...
@@ -31,19 +59,15 @@ class engine():
                   
                  """)
            engine.menu.header()
-           csinp = console.input("\n [bright_yellow][bold]Enter a number from the list, then press enter: ")
-           return csinp
-
-    
-    mMenu = menu.mainMenu()
-    if mMenu == 1:
-        flasher.flash()
-    elif mMenu == 2:
-        flasher.patch()
-    elif mMenu == 3:
-        flasher.dump()
-    elif mMenu == 4: print("not yet")
-    elif mMenu == 5: print("not yet")
+           csinp = console.input("[bright_yellow][bold]Enter a number from the list, then press enter: ")
+           if csinp == "1":
+                engine.flasher.flash()
+           elif csinp == "2":
+                engine.flasher.patch()
+           elif csinp == "3":
+                engine.flasher.dump()
+           elif csinp == "4": print("not yet")
+           elif csinp == "5": print("not yet")
 
 
 
