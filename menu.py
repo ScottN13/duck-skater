@@ -18,6 +18,7 @@ class engine():
         def noSignature(): sys.exception("# error: selected firmware has no signature patch")
         def dumpError(): sys.exception('# error: dumping failed')
         def readError(): sys.exception("# error: couldn't read firmware patches")
+        def commandNotRecognized(): sys.exception("# error: command not recognized")
 
 
     class flasher(): # the main flasher
@@ -68,6 +69,8 @@ class engine():
                 engine.flasher.dump()
            elif csinp == "4": print("not yet")
            elif csinp == "5": print("not yet")
+           else:
+               engine.error.commandNotRecognized()
 
 
 
