@@ -13,12 +13,12 @@ class engine():
     def clear(): os.system('cls' if os.name == 'nt' else 'clear')
 
     class error(): # error class for easy access
-        def ini(): sys.exception("# error: main.ini not found")
-        def emptyFirm(): sys.exception("# error: selected target has no firmware partition")
-        def noSignature(): sys.exception("# error: selected firmware has no signature patch")
-        def dumpError(): sys.exception('# error: dumping failed')
-        def readError(): sys.exception("# error: couldn't read firmware patches")
-        def commandNotRecognized(): sys.exception("# error: command not recognized")
+        def ini(): sys.exit("# error: main.ini not found")
+        def emptyFirm(): sys.exit("# error: selected target has no firmware partition")
+        def noSignature(): sys.exit("# error: selected firmware has no signature patch")
+        def dumpError(): sys.exit('# error: dumping failed')
+        def readError(): sys.exit("# error: couldn't read firmware patches")
+        def commandNotRecognized(): sys.exit("# error: command not recognized")
 
 
     class flasher(): # the main flasher
@@ -37,7 +37,14 @@ class engine():
                 engine.error.ini()
 
 
-        def patch(): ...
+        def patch():
+            engine.clear()
+            print("Fetching patch folder ('duck-skater/patches')")
+            patchesFolder = os.listdir("patches/")
+            print(f"Files found: {patchesFolder}")
+            print("separating useless files from patches")
+
+
         def dump(): ...
         def update(): ...
 
