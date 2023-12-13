@@ -30,11 +30,17 @@ class engine():
         def flash():
             engine.clear()
             print("Loading flasher...")
-            try:
+            try: # fetch signature patch from firmware folder
                 sigPatchVer = str(config["MAIN"]["sigPatchVer"])
-                print("Current SignaturePatch version is "+sigPatchVer)
+                print(f"Current SignaturePatch version is {sigPatchVer} in 'config/main.ini'")
             except:
                 engine.error.ini()
+
+            # fetch firmware
+            # menu
+            console.print("------------[bright_yellow][bold]DUCK[/][/]-[bright_red][bold]SKATER[/][/]------------")
+            console.print("------------[bold]Flasher[/]------------")
+            print("""Please select target media:""")
 
 
         def patch():
@@ -50,7 +56,7 @@ class engine():
 
     class menu():
         def header():
-            console.print("------------[bright_yellow][bold]DUCK[/][/]-[bright_red][bold]SKATER[/][/]-----------")
+            console.print("------------[bright_yellow][bold]DUCK[/][/]-[bright_red][bold]SKATER[/][/]------------")
 
         def logo():...
         
