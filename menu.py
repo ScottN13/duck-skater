@@ -8,6 +8,7 @@ config.read("config/main.ini")
 console = Console()
 
 
+
 class engine():
 
     def clear(): os.system('cls' if os.name == 'nt' else 'clear')
@@ -40,7 +41,10 @@ class engine():
             # menu
             console.print("------------[bright_yellow][bold]DUCK[/][/]-[bright_red][bold]SKATER[/][/]------------")
             console.print("------------[bold]Flasher[/]------------")
-            print("""Please select target media:""")
+            print(f"""Please select target media:
+                        {os.listdrives()}
+                  """)
+            targetMedia = console.input("Target (case sensitive):")
 
 
         def patch():
