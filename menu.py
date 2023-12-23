@@ -2,6 +2,7 @@ import os
 import sys
 from rich.console import Console
 from configparser import ConfigParser
+import regex
 
 config = ConfigParser(comment_prefixes="#", delimiters="=")
 config.read("config/main.ini")
@@ -20,6 +21,7 @@ class engine():
         def dumpError(): sys.exit('# error: dumping failed')
         def readError(): sys.exit("# error: couldn't read firmware patches")
         def commandNotRecognized(): sys.exit("# error: command not recognized")
+        def targetError(): sys.exit("# error: target volume isn't writeable or is denied access")
 
 
     class flasher(): # the main flasher
@@ -45,6 +47,10 @@ class engine():
                         {os.listdrives()}
                   """)
             targetMedia = console.input("Target (case sensitive):")
+            drives = os.listdrives()
+            if targetMedia == "C://": engine.error.targetError()
+            elif targetMedia != drives: engine.error.targetError()
+                
 
 
         def patch():
