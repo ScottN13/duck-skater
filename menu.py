@@ -46,10 +46,14 @@ class engine():
             print(f"""Please select target media:
                         {os.listdrives()}
                   """)
-            targetMedia = console.input("Target (case sensitive):")
+            targetMedia = console.input("[bold]Target (case sensitive): ")
+            console.print(f"[bold][bright_yellow]Checking {targetMedia} (1/)")
             drives = os.listdrives()
-            if targetMedia == "C://": engine.error.targetError()
-            elif targetMedia != drives: engine.error.targetError()
+            if targetMedia == 'C:\\':
+                engine.error.targetError()
+            for targetMedia, v in drives.append(targetMedia):
+                if targetMedia in drives:
+                    console.print("[bold][bright_green]Success! Target found! (2/)")
                 
 
 
